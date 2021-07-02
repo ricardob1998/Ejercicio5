@@ -21,19 +21,45 @@ namespace Ejercicio5
         {
             Random aletorio = new Random();
             int[,] matriz;
-            int fila, columna;
+            int columna, fila;
             fila = int.Parse(FilatextBox.Text);
             columna = int.Parse(ColumnatextBox.Text);
             matriz = new int[fila, columna];
+            dataGridView1.ColumnCount = columna;
+            dataGridView1.RowCount = fila;
 
-            for (int i = 0; i < matriz.Length; i++)
-            {
-                for (int j = 0; j < matriz.Length; j++)
+            for (int filas = 0; filas < matriz.GetLength(0); filas++)
+            { 
+                for (int col = 0; col < matriz.GetLength(1); col++)
                 {
-                    matriz[i, j] = aletorio.Next(100);
+                    matriz[filas, col] = aletorio.Next(100);
+                    
                 }
             }
-            NumerosAletorioslistBox.Items.Add(matriz);
+
+            for (int filas = 0; filas < matriz.GetLength(0); filas++)
+            {
+                for (int col = 0; col < matriz.GetLength(1); col++)
+                {
+
+                    dataGridView1.Rows[filas].Cells[col].Value = matriz[filas, col];
+                }
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FilatextBox.Clear();
+            ColumnatextBox.Clear();
+            dataGridView1.Rows.Clear();
+            dataGridView1.Columns.Clear();
+            
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
